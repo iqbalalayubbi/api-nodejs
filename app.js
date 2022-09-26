@@ -3,6 +3,8 @@ const app = express();
 
 const port = process.env.PORT || 3000
 
+const cors = require('cors');
+
 var admin = require("firebase-admin");
 const {getFirestore} = require('firebase-admin/firestore')
 
@@ -17,6 +19,9 @@ const db = getFirestore();
 const User = db.collection('user')
 
 app.use(express.json());
+app.use(cors({
+    origin:'*'
+}))
 
 app.get('/',async(req,res) => {
     const response = await User.get();
